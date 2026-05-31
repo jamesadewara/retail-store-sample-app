@@ -10,3 +10,23 @@ output "retail_app_url" {
     "LoadBalancer provisioning - run: kubectl get svc -n ui ui"
   )
 }
+
+output "cluster_endpoint" {
+  value = module.retail_app_eks.cluster_endpoint
+}
+
+output "cluster_name" {
+  value = "${module.retail_app_eks.eks_cluster_id}-cluster"
+}
+
+output "region" {
+  value = "us-east-1"
+}
+
+output "vpc_id" {
+  value = module.vpc.inner.vpc_id
+}
+
+output "assets_bucket_name" {
+  value = "bedrock-assets-altsoe0253359"
+}

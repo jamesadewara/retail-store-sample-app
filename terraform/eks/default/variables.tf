@@ -1,7 +1,7 @@
 variable "environment_name" {
   description = "Name of the environment"
   type        = string
-  default     = "retail-store"
+  default     = "project-bedrock"
 }
 
 variable "istio_enabled" {

@@ -51,7 +51,7 @@ module "retail_app_eks" {
   }
 
   environment_name      = var.environment_name
-  cluster_version       = "1.33"
+  cluster_version       = "1.34"
   vpc_id                = module.vpc.inner.vpc_id
   vpc_cidr              = module.vpc.inner.vpc_cidr_block
   subnet_ids            = module.vpc.inner.private_subnets
@@ -59,4 +59,12 @@ module "retail_app_eks" {
   tags                  = module.tags.result
 
   istio_enabled = var.istio_enabled
+}
+
+module "s3_lambda" {
+  source = "../../lib/s3_lambda"
+}
+
+module "iam_developer" {
+  source = "../../lib/iam_developer"
 }
