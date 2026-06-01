@@ -39,3 +39,15 @@ variable "allowed_security_group_ids" {
   default     = []
   description = "List of additional allowed security group IDs"
 }
+
+variable "catalog_opensearch_instance_type"{
+  type        = string
+  description = "Instance type for OpenSearch domain of the catalog component"
+  default     = "t3.small.search" # "r8g.medium.search" --- IGNORE ---
+}
+
+variable "aws_mq_broker_host_instance_type"{
+  type        = string
+  description = "Host instance type for AWS MQ broker"
+  default     = "mq.t3.micro" # "mq.m5.large" --- IGNORE ---
+}

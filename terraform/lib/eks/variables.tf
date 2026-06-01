@@ -3,6 +3,12 @@ variable "environment_name" {
   type        = string
 }
 
+variable "eks_instance_types" {
+  description = "EKS node instance type."
+  type        = list(string)
+  default     = ["t3.micro"] # "m5.large" --- IGNORE ---
+}
+
 variable "cluster_version" {
   description = "EKS cluster version."
   type        = string
