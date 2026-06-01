@@ -49,5 +49,11 @@ variable "catalog_opensearch_instance_type"{
 variable "aws_mq_broker_host_instance_type"{
   type        = string
   description = "Host instance type for AWS MQ broker"
-  default     = "mq.t3.micro" # "mq.m5.large" --- IGNORE ---
+  default     = "mq.t3.small" # "mq.m5.large" --- IGNORE ---
+}
+
+variable "rds_backup_retention_period" {
+  type        = number
+  description = "Number of days to retain backups for RDS instances"
+  default     = 1 # Set to 1 day for cost optimization; adjust as needed --- IGNORE ---
 }

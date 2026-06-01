@@ -22,6 +22,7 @@ module "orders_rds" {
   storage_encrypted      = true
   apply_immediately      = true
   skip_final_snapshot    = true
+  backup_retention_period = var.rds_backup_retention_period
 
   create_db_parameter_group = true
   db_parameter_group_name   = "${var.environment_name}-orders"
