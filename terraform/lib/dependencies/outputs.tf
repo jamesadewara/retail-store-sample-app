@@ -11,7 +11,7 @@ output "catalog_db_database_name" {
 
 output "catalog_db_master_password" {
   description = "Master password for the catalog database"
-  value       = module.catalog_rds.db_instance_master_password
+  value       = random_string.catalog_db_master.result
   sensitive   = true
 }
 
@@ -48,7 +48,7 @@ output "orders_db_database_name" {
 
 output "orders_db_master_password" {
   description = "Master password for the orders database"
-  value       = module.orders_rds.db_instance_master_password
+  value       = random_string.orders_db_master.result
   sensitive   = true
 }
 
