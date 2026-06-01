@@ -4,10 +4,11 @@ module "orders_rds" {
 
   identifier = "${var.environment_name}-orders"
 
-  engine            = "postgres"
-  engine_version    = "15.4"
-  instance_class    = "db.t3.medium"
-  allocated_storage = 20
+  engine               = "postgres"
+  major_engine_version = "15"
+  engine_version       = "15.4"
+  instance_class       = var.orders_rds_instance_class
+  allocated_storage    = 20
 
   subnet_ids = var.subnet_ids
 
