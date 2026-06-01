@@ -1,41 +1,36 @@
 module "orders_rds" {
-  source  = "terraform-aws-modules/rds-aurora/aws"
-  version = "7.7.1"
+  source  = "terraform-aws-modules/rds/aws"
+  version = "6.5.0"
 
-  name           = "${var.environment_name}-orders"
-  engine         = "aurora-postgresql"
-  engine_version = "15.10"
-  instance_class = "db.t3.medium"
+  identifier = "${var.environment_name}-orders"
 
-  instances = {
-    one = {}
-  }
+  engine            = "postgres"
+  engine_version    = "15.4"
+  instance_class    = "db.t3.medium"
+  allocated_storage = 20
 
-  vpc_id  = var.vpc_id
-  subnets = var.subnet_ids
+  subnet_ids = var.subnet_ids
 
-  allowed_security_groups = concat(var.allowed_security_group_ids, [var.orders_security_group_id])
+  vpc_security_group_ids = concat(var.allowed_security_group_ids, [var.orders_security_group_id])
 
-  master_password        = random_string.orders_db_master.result
-  create_random_password = false
-  database_name          = "orders"
-  storage_encrypted      = true
-  apply_immediately      = true
-  skip_final_snapshot    = true
+  db_name  = "orders"
+  username = "dbadmin"
+  password = random_string.orders_db_master.result
+
+  storage_encrypted   = true
+  apply_immediately   = true
+  skip_final_snapshot = true
+
   backup_retention_period = var.rds_backup_retention_period
 
   create_db_parameter_group = true
-  db_parameter_group_name   = "${var.environment_name}-orders"
-  db_parameter_group_family = "aurora-postgresql15"
-
-  create_db_cluster_parameter_group = true
-  db_cluster_parameter_group_name   = "${var.environment_name}-orders"
-  db_cluster_parameter_group_family = "aurora-postgresql15"
+  parameter_group_name      = "${var.environment_name}-orders"
+  family                    = "postgres15"
 
   tags = var.tags
 }
 
 resource "random_string" "orders_db_master" {
-  length  = 10
+  length  = 16
   special = false
 }
